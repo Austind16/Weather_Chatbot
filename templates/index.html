@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<div class="page">
+    <header class="hero">
+        <div class="logo">🌦️</div>
+        <div>
+            <h1>Weather Chatbot</h1>
+            <p>The elegant, professional way to ask anything weather-related.</p>
+
+            <button class="theme-toggle" id="themeToggle" type="button">
+            🌙 Dark
+            </button>
+        </div>
+    </header>
+
+    <main class="app-layout">
+
+        <aside class="weather-panel">
+            <p class="label">Current conditions for</p>
+
+            {% if current_weather %}
+                <h2>{{ current_weather.city }} <span>📍</span></h2>
+
+                <div class="weather-main">
+                    <div class="weather-icon">🌦️</div>
+                    <div>
+                        <h4>{{ current_weather.temp }}°C</h4>
+                        <p>{{ current_weather.description.title() }}</p>
+                        <small>Feels like {{ current_weather.feels_like }}°C</small>
+                    </div>
+                </div>
+
+                <div class="weather-stats">
+                    <div>
+                        <span>💧</span>
+                        <p>Humidity</p>
+                        <strong>{{ current_weather.humidity }}%</strong>
+                    </div>
+
+                    <div>
+                        <span>💨</span>
+                        <p>Wind</p>
+                        <strong>{{ current_weather.wind }} m/s</strong>
+                    </div>
+
+                    <div>
+                        <span>🌡️</span>
+                        <p>Temp</p>
+                        <strong>{{ current_weather.temp }}°C</strong>
+                    </div>
+                </div>
+
+        <div class="info-box">
+            <span>☁️</span>
+            <div>
+                <p>Condition</p>
+                <strong>{{ current_weather.description.title() }}</strong>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <span>🕒</span>
+            <div>
+                <p>Last updated</p>
+                <strong>Just now</strong>
+            </div>
+        </div>
+
+    {% else %}
+        <h2>Your City <span>📍</span></h2>
+
+        <div class="weather-main">
+            <div class="weather-icon">🌦️</div>
+            <div>
+                <h3>--°C</h3>
+                <p>No city selected</p>
+                <small>Ask about weather to update this card</small>
+            </div>
+        </div>
+
+        <div class="weather-stats">
+            <div>
+                <span>💧</span>
+                <p>Humidity</p>
+                <strong>--%</strong>
+            </div>
+
+            <div>
+                <span>💨</span>
+                <p>Wind</p>
+                <strong>--</strong>
+            </div>
+
+            <div>
+                <span>🌡️</span>
+                <p>Temp</p>
+                <strong>--°C</strong>
+            </div>
+        </div>
+
+        <div class="info-box">
+            <span>💡</span>
+            <div>
+                <p>Tip</p>
+                <strong>Try: weather in Mumbai</strong>
+            </div>
+        </div>
+    {% endif %}
+</aside>
+
+        <section class="chat-card">
+            <div class="chat-header">
+                <div>
+                    <h2>Weather Assistant</h2>
+                    <p>Ask about temperature, humidity, wind, or general conditions.</p>
+                </div>
+                <div class="header-icon">☁️</div>
+            </div>
+
+           <div class="chat-box">
+
+    <div class="message-row bot-row">
+        <div class="avatar">🤖</div>
+        <div class="bot-message">
+            <p>Hello! 👋</p>
+            <p>Ask me anything about weather.</p>
+        </div>
+    </div>
+
+    {% for chat in chat_history %}
+        <div class="message-row user-row">
+            <div class="user-message">
+                {{ chat.user }}
+            </div>
+        </div>
+
+        <div class="message-row bot-row">
+            <div class="avatar">🤖</div>
+            <div class="bot-message">
+                {{ chat.bot }}
+            </div>
+        </div>
+    {% endfor %}
+
+</div>
+
+
+            <form method="POST" class="chat-form">
+                <input type="text" name="message" placeholder="Type your message here..." required>
+                <button type="submit">Send ➤</button>
+            </form>
+        </section>
+
+    </main>
+    <script src="{{ url_for('static', filename='JS/script.js') }}"></script>
+</div>
+
+</body>
+</html>
