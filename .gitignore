@@ -8,3 +8,8 @@ instance/
 # Python cache
 __pycache__/
 *.py[cod]
+
+services/
+**/__pycache__/
+**/*.pyc
+**/*.pyd
