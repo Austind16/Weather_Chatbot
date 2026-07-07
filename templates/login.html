@@ -3,29 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login | Weather Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
-<body>
+<body class="auth-page">
+    <div class="auth-shell">
+        <section class="auth-hero">
+            <div class="auth-brand-mark">🌦️</div>
+            <p class="auth-eyebrow">Weather Chatbot</p>
+            <h1>Welcome back</h1>
+            <p class="auth-copy">
+                Sign in to check live weather, revisit your chat history, and keep exploring conditions in a cleaner, faster flow.
+            </p>
 
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-                <p>{{ message }}</p>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-    
-    <h1>Login</h1>
-    <form method="POST" action="/login">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <br><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <br><br>
-        <button type="submit">Login</button>
-    </form>
-    flash("Login functionality is not implemented yet.")
+            <div class="auth-points">
+                <div>
+                    <span>⚡</span>
+                    <div>
+                        <strong>Instant responses</strong>
+                        <p>Ask about rain, humidity, wind, and more.</p>
+                    </div>
+                </div>
+                <div>
+                    <span>🧭</span>
+                    <div>
+                        <strong>Simple navigation</strong>
+                        <p>Jump straight into your weather assistant.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="auth-card">
+            <div class="auth-card-header">
+                <p class="auth-kicker">Secure sign in</p>
+                <h2>Login</h2>
+                <p>Use your registered email and password to continue.</p>
+            </div>
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="auth-alerts">
+                        {% for message in messages %}
+                            <div class="auth-alert">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <form method="POST" action="/login" class="auth-form">
+                <label for="email">Email address</label>
+                <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" required autofocus>
+
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" autocomplete="current-password" required>
+
+                <button type="submit">Sign in</button>
+            </form>
+
+            <p class="auth-footer">
+                New here? <a href="{{ url_for('register') }}">Create an account</a>
+            </p>
+        </section>
+    </div>
 </body>
 </html>
