@@ -77,7 +77,6 @@ def index():
 def register():
 
     if "user_id" in session:
-        flash("You are already logged in.")
         return redirect(url_for("index"))
 
     if request.method == "POST":
@@ -122,7 +121,6 @@ def register():
 def login():
 
     if "user_id" in session:
-        flash("You are already logged in.")
         return redirect(url_for("index"))
 
     if request.method == "POST":

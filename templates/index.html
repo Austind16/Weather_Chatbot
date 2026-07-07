@@ -13,9 +13,13 @@
             <h1>Weather Chatbot</h1>
             <p>The elegant, professional way to ask anything weather-related.</p>
 
-            <button class="theme-toggle" id="themeToggle" type="button">
-            🌙 Dark
-            </button>
+            <div class="header-actions">
+                <button class="theme-toggle" id="themeToggle" type="button">🌙 Dark</button>
+
+                {% if 'user_id' in session %}
+                <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+                {% endif %}
+            </div>
         </div>
     </header>
 

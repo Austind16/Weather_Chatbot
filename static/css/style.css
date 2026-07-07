@@ -344,7 +344,7 @@ body {
 }
 
 .theme-toggle {
-    margin-left: auto;
+    margin-left: 0;
     border: 1px solid #cbd5e1;
     background: #ffffff;
     color: #0b1f4d;
@@ -358,6 +358,41 @@ body {
 
 .theme-toggle:hover {
     background: #f8fafc;
+}
+
+/* Header actions */
+.header-actions {
+    margin-left: auto;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.logout-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(37, 99, 235, 0.15);
+    background: linear-gradient(180deg, #ffffff, #f8fbff);
+    color: #0b3a8c;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 10px 26px rgba(37, 99, 235, 0.06);
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+
+.logout-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 36px rgba(37, 99, 235, 0.12);
+    background: #f1f8ff;
+}
+
+@media (max-width: 900px) {
+    .header-actions {
+        margin-left: 0;
+    }
 }
 
 /* DARK MODE */
