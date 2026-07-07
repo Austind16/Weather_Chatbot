@@ -1,7 +1,6 @@
 import os
 
 from flask import Flask, render_template, request, session
-from matplotlib.pylab import rint
 
 from services.chatbot_service import get_chatbot_response, parse_message
 from services.weather_service import get_weather
@@ -11,7 +10,7 @@ from dotenv import load_dotenv
 from extensions import db
 
 from flask import flash, redirect, url_for
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 from models import User
 
@@ -28,6 +27,11 @@ app.secret_key = os.getenv("SECRET_KEY")
 
 @app.route("/", methods=["GET", "POST"])
 def index():
+
+    if "user_id" not in session:
+        flash("Please login first.")
+        return redirect(url_for("login"))
+
     if "chat_history" not in session:
         session["chat_history"] = []
 
@@ -72,6 +76,10 @@ def index():
 @app.route("/register", methods=["GET", "POST"])
 def register():
 
+    if "user_id" in session:
+        flash("You are already logged in.")
+        return redirect(url_for("index"))
+
     if request.method == "POST":
 
         username = request.form.get("username")
@@ -109,6 +117,43 @@ def register():
         return redirect(url_for("register"))
 
     return render_template("register.html")
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+
+    if "user_id" in session:
+        flash("You are already logged in.")
+        return redirect(url_for("index"))
+
+    if request.method == "POST":
+
+        email = request.form.get("email")
+        password = request.form.get("password")
+
+        user = User.query.filter_by(email=email).first()
+
+        if user is None:
+            flash("Invalid email or password.")
+            return redirect(url_for("login"))
+        
+        if not check_password_hash(user.password_hash, password):
+            flash("Invalid email or password.")
+            return redirect(url_for("login"))
+        
+        session["user_id"] = user.id
+        flash("Login successful!")
+        return redirect(url_for("index"))
+    
+    return render_template("login.html")
+
+@app.route("/logout")
+def logout():
+
+    session.pop("user_id", None)
+
+    flash("Logged out successfully.")
+
+    return redirect(url_for("login"))
 
 
 if __name__ == "__main__":
