@@ -35,8 +35,10 @@ if database_url.startswith("postgres://"):
         "postgresql://",
         1
     )
-    
+
 db.init_app(app)
+from extensions import migrate
+migrate.init_app(app, db)
 
 app.secret_key = os.getenv("SECRET_KEY")
 
@@ -141,7 +143,7 @@ def register():
 
         flash("Registration successful.")
 
-        return redirect(url_for("register"))
+        return redirect(url_for("login"))
 
     return render_template("register.html")
 
