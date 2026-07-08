@@ -49,14 +49,16 @@ def index():
         flash("Please login first.")
         return redirect(url_for("login"))
 
-    if "chat_history" not in session:
-        session["chat_history"] = []
-
     if "current_weather" not in session:
         session["current_weather"] = None
 
     
     user = db.session.get(User, session["user_id"])
+
+    if user is None:
+        session.clear()
+        flash("Please login again.")
+        return redirect(url_for("login"))
 
     if request.method == "POST":
         if "clear" in request.form:
@@ -67,10 +69,6 @@ def index():
                     db.session.delete(chat)
 
                 db.session.commit()
-
-            session["chat_history"] = []
-            session["current_weather"] = None
-            session.modified = True
 
         else:
             user_message = request.form.get("message")
@@ -177,7 +175,7 @@ def login():
 @app.route("/logout")
 def logout():
 
-    session.pop("user_id", None)
+    session.clear()
 
     flash("Logged out successfully.")
 
