@@ -6,6 +6,9 @@ load_dotenv()
 class Config:
     SECRET_KEY = os.getenv("SECRET_KEY")
 
-    SQLALCHEMY_DATABASE_URI = "sqlite:///weather_chatbot.db"
+    SQLALCHEMY_DATABASE_URI = os.getenv(
+    "DATABASE_URL",
+    "sqlite:///weather_chatbot.db"
+    )
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
