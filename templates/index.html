@@ -124,7 +124,12 @@
                     <h2>Weather Assistant</h2>
                     <p>Ask about temperature, humidity, wind, or general conditions.</p>
                 </div>
-                <div class="header-icon">☁️</div>
+                <div class="chat-header-actions">
+                    <form method="POST" class="clear-history-form">
+                        <button type="submit" name="clear" value="1" class="clear-history-button">Clear Chat</button>
+                    </form>
+                    <div class="header-icon">☁️</div>
+                </div>
             </div>
 
            <div class="chat-box">
@@ -140,14 +145,14 @@
     {% for chat in chat_history %}
         <div class="message-row user-row">
             <div class="user-message">
-                {{ chat.user }}
+                {{ chat.user_message }}
             </div>
         </div>
 
         <div class="message-row bot-row">
             <div class="avatar">🤖</div>
             <div class="bot-message">
-                {{ chat.bot }}
+                {{ chat.bot_response }}
             </div>
         </div>
     {% endfor %}

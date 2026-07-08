@@ -1,6 +1,14 @@
 import os
 
-from flask import Flask, render_template, request, session
+from flask import (
+    Flask,
+    render_template,
+    request,
+    session,
+    flash,
+    redirect,
+    url_for,
+)
 
 from services.chatbot_service import get_chatbot_response, parse_message
 from services.weather_service import get_weather
@@ -9,10 +17,9 @@ from dotenv import load_dotenv
 
 from extensions import db
 
-from flask import flash, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from models import User
+from models import Chat, User
 
 load_dotenv()
 
@@ -20,8 +27,6 @@ app = Flask(__name__)
 
 app.config.from_object("config.Config")
 db.init_app(app)
-
-import models
 
 app.secret_key = os.getenv("SECRET_KEY")
 
@@ -38,8 +43,19 @@ def index():
     if "current_weather" not in session:
         session["current_weather"] = None
 
+    
+    user = db.session.get(User, session["user_id"])
+
     if request.method == "POST":
         if "clear" in request.form:
+            user = db.session.get(User, session["user_id"])
+
+            if user:
+                for chat in list(user.chats):
+                    db.session.delete(chat)
+
+                db.session.commit()
+
             session["chat_history"] = []
             session["current_weather"] = None
             session.modified = True
@@ -60,17 +76,19 @@ def index():
                     if weather_data:
                         session["current_weather"] = weather_data
 
-                session["chat_history"].append({
-                    "user": user_message,
-                    "bot": bot_reply
-                })
+                chat = Chat(
+                user_message=user_message,
+                bot_response=bot_reply,
+                user_id=session["user_id"]
+                )
 
-                session.modified = True
+                db.session.add(chat)
+                db.session.commit()
 
     return render_template(
         "index.html",
-         chat_history = session["chat_history"],
-         current_weather = session["current_weather"]
+        chat_history=user.chats,
+        current_weather=session["current_weather"]
     )
 
 @app.route("/register", methods=["GET", "POST"])

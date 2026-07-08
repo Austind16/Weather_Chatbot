@@ -63,8 +63,6 @@ def parse_message(message):
         response = model.generate_content(prompt)
         text = response.text.strip()
 
-        print("GEMINI RAW RESPONSE:", text)
-
         import json
         import re
 

@@ -193,6 +193,34 @@ body {
     place-items: center;
 }
 
+.chat-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.clear-history-form {
+    margin: 0;
+}
+
+.clear-history-button {
+    border: 1px solid #fecaca;
+    background: #fff1f2;
+    color: #be123c;
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+
+.clear-history-button:hover {
+    transform: translateY(-1px);
+    background: #ffe4e6;
+    box-shadow: 0 10px 20px rgba(190, 18, 60, 0.12);
+}
+
 .chat-box {
     flex: 1;
     min-height: 0;
@@ -461,6 +489,16 @@ body.dark .header-icon {
     border-color: #334155;
 }
 
+body.dark .clear-history-button {
+    background: #31202a;
+    border-color: #7f1d1d;
+    color: #fecdd3;
+}
+
+body.dark .clear-history-button:hover {
+    background: #45222b;
+}
+
 body.dark .info-box {
     background: #1e293b;
 }
@@ -719,6 +757,23 @@ body.auth-page::before {
     border-color: #2563eb;
     box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
     transform: translateY(-1px);
+}
+
+.password-toggle {
+    justify-self: start;
+    border: none;
+    background: transparent;
+    color: #2563eb;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: -4px;
+}
+
+.password-toggle:hover {
+    color: #1d4ed8;
+    text-decoration: underline;
 }
 
 .auth-form button {
