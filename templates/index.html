@@ -15,9 +15,14 @@
 
             <div class="header-utility-bar">
                 {% if user %}
-                <div class="welcome-chip" aria-label="Signed in user">
-                    <span>Welcome</span>
-                    <strong>{{ user.username }}</strong>
+                <div class="welcome-card" aria-label="Signed in user">
+                    <div class="welcome-avatar" aria-hidden="true">
+                        {{ user.username[:1]|upper }}
+                    </div>
+                    <div class="welcome-copy">
+                        <span>Welcome back</span>
+                        <strong>{{ user.username }}</strong>
+                    </div>
                 </div>
                 {% endif %}
 
@@ -153,15 +158,27 @@
 
     {% for chat in chat_history %}
         <div class="message-row user-row">
-            <div class="user-message">
-                {{ chat.user_message }}
+            <div class="message-stack user-stack">
+                <div class="user-message">
+                    {{ chat.user_message }}
+                </div>
+
+                <div class="message-timestamp">
+                    {{ chat.created_at.strftime("%I:%M %p") }}
+                </div>
             </div>
         </div>
 
         <div class="message-row bot-row">
             <div class="avatar">🤖</div>
-            <div class="bot-message">
-                {{ chat.bot_response }}
+            <div class="message-stack bot-stack">
+                <div class="bot-message">
+                    {{ chat.bot_response }}
+                </div>
+
+                <div class="message-timestamp">
+                    {{ chat.created_at.strftime("%I:%M %p") }}
+                </div>
             </div>
         </div>
     {% endfor %}
