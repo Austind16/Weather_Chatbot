@@ -1,68 +1,287 @@
-# Weather Chatbot
+# 🌦️ Weather Chatbot
 
-A web-based chatbot built with Flask that provides real-time weather information and natural conversation. Users can ask about the weather, humidity, or wind in any city, and the chatbot responds with up-to-date data using the OpenWeatherMap API and Google Gemini for enhanced understanding.
+> A modern full-stack weather chatbot built with **Flask**, **PostgreSQL**, and the **OpenWeather API**, featuring secure authentication, persistent chat history, and a beautiful responsive interface.
 
-## Features
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.13-blue?style=for-the-badge&logo=python">
+  <img src="https://img.shields.io/badge/Flask-3.x-black?style=for-the-badge&logo=flask">
+  <img src="https://img.shields.io/badge/PostgreSQL-Database-blue?style=for-the-badge&logo=postgresql">
+  <img src="https://img.shields.io/badge/SQLAlchemy-ORM-red?style=for-the-badge">
+  <img src="https://img.shields.io/badge/OpenWeather-API-orange?style=for-the-badge">
+</p>
 
-- **Conversational Chatbot:** Ask about weather, humidity, or wind in any city.
-- **Live Weather Data:** Fetches current weather using OpenWeatherMap API.
-- **Natural Language Understanding:** Uses Google Gemini for intent detection and city extraction.
-- **Session-based Chat History:** Remembers your conversation during the session.
-- **Simple Web Interface:** Clean UI with weather panels and chat.
+---
 
-## Installation
+## 📖 Overview
 
-1. **Clone the repository:**
-	```
-	git clone <repo-url>
-	cd Weather_Chatbot
-	```
+Weather Chatbot is a full-stack web application that allows users to ask weather-related questions in natural language.
 
-2. **Install dependencies:**
-	```
-	pip install -r requirements.txt
-	```
+Instead of manually searching for weather information, users can simply type questions like:
 
-3. **Set up environment variables:**
-	- Create a `.env` file in the root directory.
-	- Add your OpenWeatherMap API key and Gemini API key:
-	  ```
-	  API_KEY=your_openweathermap_api_key
-	  GEMINI_API_KEY=your_gemini_api_key
-	  SECRET_KEY=your_flask_secret_key
-	  ```
+> "What's the weather in London?"
 
-4. **Run the app:**
-	```
-	python app.py
-	```
+or
 
-5. **Open your browser:**  
-	Visit `http://127.0.0.1:5000/`
+> "How humid is Mumbai today?"
 
-## Project Structure
+The chatbot understands the request, fetches live weather data from the **OpenWeather API**, stores conversations in a PostgreSQL database, and provides a clean conversational experience.
 
-- `app.py` — Main Flask application.
-- `services/`
-  - `chatbot_service.py` — Handles chatbot logic and intent parsing.
-  - `weather_service.py` — Fetches weather data from OpenWeatherMap.
-- `templates/` — HTML templates.
-- `static/` — CSS, JS, and images.
-- `utils/` — Helper functions.
+---
 
-## Requirements
+# ✨ Features
 
+### 🔐 Authentication
+- User Registration
+- Secure Login
+- Password Hashing using Werkzeug
+- Session-based Authentication
+
+### 🤖 Chatbot
+- Natural language weather queries
+- Live weather responses
+- Persistent chat history
+- Individual chats for every user
+
+### 🌍 Weather
+- Real-time weather
+- Temperature
+- Humidity
+- Wind Speed
+- Weather Description
+- "Feels Like" Temperature
+
+### 🎨 User Experience
+- Modern responsive UI
+- Light & Dark Mode
+- Auto-scrolling chat
+- Loading animations
+- Clear Chat feature
+- Mobile-friendly design
+
+---
+
+# 🛠️ Built With
+
+## Backend
+
+- Python
 - Flask
-- requests
+- SQLAlchemy
+- Flask-Migrate
+- PostgreSQL
+- Werkzeug
 - python-dotenv
-- google-generativeai
 
-## Example Usage
+## Frontend
 
-- “What’s the weather in London?”
-- “Is it humid in Mumbai?”
-- “How windy is it in New York?”
+- HTML5
+- CSS3
+- JavaScript
 
-## License
+## APIs
 
-MIT License
+- OpenWeather API
+
+---
+
+# 📂 Project Structure
+
+```text
+Weather-Chatbot/
+│
+├── app.py
+├── config.py
+├── extensions.py
+├── models.py
+│
+├── services/
+│   ├── chatbot_service.py
+│   └── weather_service.py
+│
+├── templates/
+│   ├── index.html
+│   ├── login.html
+│   └── register.html
+│
+├── static/
+│   ├── css/
+│   ├── js/
+│   └── images/
+│
+├── migrations/
+│
+├── requirements.txt
+└── README.md
+```
+
+---
+
+# 🚀 Getting Started
+
+## 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/weather-chatbot.git
+
+cd weather-chatbot
+```
+
+---
+
+## 2️⃣ Create a Virtual Environment
+
+```bash
+python -m venv venv
+```
+
+Activate it:
+
+### Windows
+
+```bash
+venv\Scripts\activate
+```
+
+### macOS / Linux
+
+```bash
+source venv/bin/activate
+```
+
+---
+
+## 3️⃣ Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## 4️⃣ Configure Environment Variables
+
+Create a `.env` file.
+
+```env
+SECRET_KEY=your_secret_key
+
+DATABASE_URL=your_database_url
+
+OPENWEATHER_API_KEY=your_api_key
+```
+
+---
+
+## 5️⃣ Initialize Database
+
+```bash
+flask db upgrade
+```
+
+---
+
+## 6️⃣ Run the Application
+
+```bash
+python app.py
+```
+
+Open:
+
+```
+http://127.0.0.1:5000
+```
+
+---
+
+# 📸 Screenshots
+
+You can add screenshots here.
+
+```text
+Login Page
+
+Register Page
+
+Main Chat Interface
+
+Dark Mode
+
+Weather Panel
+```
+
+---
+
+# 🔒 Security Features
+
+✔ Password hashing
+
+✔ SQLAlchemy ORM (SQL Injection protection)
+
+✔ Session Authentication
+
+✔ User-specific chat history
+
+✔ Environment variables for sensitive keys
+
+---
+
+# 📚 What I Learned
+
+This project helped me gain practical experience with:
+
+- Flask Application Development
+- Backend Architecture
+- PostgreSQL
+- SQLAlchemy ORM
+- Authentication Systems
+- Password Security
+- Session Management
+- REST API Integration
+- Database Relationships
+- Responsive Web Design
+- JavaScript DOM Manipulation
+- API Error Handling
+
+---
+
+# 🎯 Future Improvements
+
+- AI-powered weather conversations using an LLM
+- 5-day weather forecast
+- Geolocation support
+- Weather charts
+- Voice input
+- Speech synthesis
+- Weather notifications
+- User profile page
+- Unit conversion (°C / °F)
+- Docker support
+- Automated testing
+- CI/CD pipeline
+
+---
+
+# 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome.
+
+Feel free to fork the repository and submit a pull request.
+
+---
+
+# ⭐ Support
+
+If you found this project useful, consider giving it a ⭐ on GitHub.
+
+It helps others discover the project and motivates future improvements.
+
+---
+
+# 👨‍💻 Author
+
+**Austin**
+
+Backend Developer | Python | Flask | PostgreSQL
+
+Currently learning Backend Engineering, Data Structures & Algorithms, and building full-stack web applications.
