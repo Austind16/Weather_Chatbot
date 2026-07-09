@@ -159,21 +159,7 @@ pip install -r requirements.txt
 
 ---
 
-## 4️⃣ Configure Environment Variables
-
-Create a `.env` file.
-
-```env
-SECRET_KEY=your_secret_key
-
-DATABASE_URL=your_database_url
-
-OPENWEATHER_API_KEY=your_api_key
-```
-
----
-
-## 5️⃣ Initialize Database
+## 4️⃣ Initialize Database
 
 ```bash
 flask db upgrade
@@ -181,7 +167,7 @@ flask db upgrade
 
 ---
 
-## 6️⃣ Run the Application
+## 5️⃣ Run the Application
 
 ```bash
 python app.py
