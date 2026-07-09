@@ -101,7 +101,8 @@ def index():
     return render_template(
         "index.html",
         chat_history=user.chats,
-        current_weather=session["current_weather"]
+        current_weather=session["current_weather"],
+        user=user
     )
 
 @app.route("/register", methods=["GET", "POST"])
