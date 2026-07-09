@@ -81,6 +81,7 @@ The chatbot understands the request, fetches live weather data from the **OpenWe
 ## APIs
 
 - OpenWeather API
+- Gemini API as a fallback case
 
 ---
 
