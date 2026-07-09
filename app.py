@@ -95,6 +95,9 @@ def index():
                 db.session.add(chat)
                 db.session.commit()
 
+
+    return redirect(url_for("index"))
+
     return render_template(
         "index.html",
         chat_history=user.chats,
