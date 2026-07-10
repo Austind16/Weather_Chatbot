@@ -74,9 +74,15 @@ def index():
             user_message = request.form.get("message")
 
             if user_message:
-                bot_reply = get_chatbot_response(user_message)
+                bot_reply = get_chatbot_response(
+                    user_message,
+                    session.get("last_city")
+                )
 
-                parsed = parse_message(user_message)
+                parsed = parse_message(
+                    user_message, 
+                    session.get("last_city")
+                )
                 intent = parsed["intent"]
                 city = parsed["city"]
 
@@ -85,6 +91,7 @@ def index():
 
                     if weather_data:
                         session["current_weather"] = weather_data
+                        session["last_city"] = weather_data["city"]
 
                 chat = Chat(
                 user_message=user_message,

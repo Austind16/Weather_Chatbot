@@ -9,7 +9,7 @@ load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 model = genai.GenerativeModel("gemini-2.5-flash-lite")
 
-def parse_message(message):
+def parse_message(message, last_city=None):
     message_lower = message.lower()
 
     # ---- STEP 1: Try RULE-BASED first ----
@@ -32,10 +32,13 @@ def parse_message(message):
         intent = "greeting"
 
     # if we successfully detected intent → DON'T use Gemini
+    city = extract_city(message) 
+    if not city:
+        city = last_city
     if intent:
         return {
             "intent": intent,
-            "city": extract_city(message)
+            "city": city
         }
     
 
@@ -103,8 +106,7 @@ def extract_city(message):
     if match:
         city = match.group(1)
     else:
-        words = message.split()
-        city = words[-1] if words else ""
+        return ""
 
     # remove extra phrases
     remove_phrases = [
@@ -118,8 +120,8 @@ def extract_city(message):
     return city.strip().title()
 
 
-def get_chatbot_response(message):
-    parsed = parse_message(message)
+def get_chatbot_response(message, last_city):
+    parsed = parse_message(message, last_city)
 
     intent = parsed["intent"]
     city = parsed["city"]
