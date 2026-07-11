@@ -122,7 +122,7 @@ Weather-Chatbot/
 ## 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/weather-chatbot.git
+git clone https://github.com/Austind16/Weather_Chatbot.git
 
 cd weather-chatbot
 ```
