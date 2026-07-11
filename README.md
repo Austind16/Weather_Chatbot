@@ -26,6 +26,8 @@ or
 
 The chatbot understands the request, fetches live weather data from the **OpenWeather API**, stores conversations in a PostgreSQL database, and provides a clean conversational experience.
 
+Live Demo 💻: https://weather-chatbot-w217.onrender.com 
+
 ---
 
 # ✨ Features
