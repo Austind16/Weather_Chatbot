@@ -188,7 +188,7 @@ http://127.0.0.1:5000
 You can add screenshots here.
 
 ## Home Page
-![Home](static/images/Home_Page.png)
+![Home](assets/Home_Page.png)
 
 ## Dark Mode
 ![Dark](assets/Dark_Theme.png)
