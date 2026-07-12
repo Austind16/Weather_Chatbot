@@ -187,17 +187,23 @@ http://127.0.0.1:5000
 
 You can add screenshots here.
 
-```text
-Login Page
+## Home Page
+![Home](static/images/Home_Page.png)
 
-Register Page
+## Dark Mode
+![Dark](assets/Dark_Theme.png)
 
-Main Chat Interface
+## Register Page
+![Register](assets/Register_Page.png)
 
-Dark Mode
+## Login Page
+![Login](assets/Login_Page.png)
 
-Weather Panel
-```
+## Weather Queries
+![Query](assets/Weather_Query.png)
+
+## Postgre SQL Database
+![DB](assets/DB.png)
 
 ---
 
